@@ -1,5 +1,6 @@
 <form #form="ngForm" (ngSubmit)="onSubmit(form)"
 [class.submitted]="formSubmitted" novalidate>
+    <!-- Email -->
     <div class="bm-3">
         <label>Email</label>
         <input class="form-control form-control-lg"
@@ -8,6 +9,7 @@
         [(ngModel)]="authService.formData.email"
         required minlength="1">
     </div>
+    <!-- Hasło -->
     <div class="bm-3">
         <label>Password</label>
         <input class="form-control form-control-lg"
@@ -18,6 +20,7 @@
         type="password"
         autocomplete="off">
     </div>
+    <!-- Guzik do zalogowania -->
     <div class="d-grid mt-3">
         <button class="btn btn-lg btn-success" type="submit">
             Login

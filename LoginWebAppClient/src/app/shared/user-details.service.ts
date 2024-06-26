@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { UserDetails, UserDetailsDTO } from './user-details.model';
 import { NgForm } from '@angular/forms';
 
+// Klasa UserDetailsWithVisibility, która zawiera UserDetailsDTO oraz dodatkowe pole mówiące, czy chcemy wyświetlać szczegóły użytkownika
 interface UserDetailsWithVisibility {
   userDetails: UserDetailsDTO;
   detailsInfo: boolean;
@@ -14,22 +15,22 @@ interface UserDetailsWithVisibility {
 })
 export class UserDetailsService {
 
-  // This is the URL of the API that we want to call
+  // Adres URL API które obsługuje żądania dotyczące użytkowników
   url:string = environment.apiBaseUrl + '/Users';
 
-  // List of Users
+  // Lista użytkowników
   list: UserDetailsWithVisibility[] = [];
 
-  // Data from form
+  // Dane z formularza
   formData: UserDetails = new UserDetails();
-  formSubmitted: boolean = false;
 
+  // Flagi (czy wysłano formularz, czy dodajemy nowego użytkownika)
+  formSubmitted: boolean = false;
   isAddingNewUser: boolean = true;
 
-  // Constructor
   constructor(private http: HttpClient) {}
 
-  // Function that displays all the users
+  // Funkcja aktualizuje listę użytkowników za pomocą żądania na serwer
   refreshList(){
     this.http.get(this.url)
     .subscribe({
@@ -46,8 +47,9 @@ export class UserDetailsService {
     })
   }
 
-  // Function that creates new user
+  // Funkcja dodaje nowego użytkownika
   postUser() {
+    // Wymagane jest dodanie sessionToken do nagłówka
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${sessionStorage.getItem('sessionToken')}`
@@ -56,7 +58,9 @@ export class UserDetailsService {
     return this.http.post(this.url, this.formData, httpOptions);
   }
 
+  // Funkcja aktualizuje wybranego użytkownika
   putUser() {
+    // Wymagane jest dodanie sessionToken do nagłówka
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${sessionStorage.getItem('sessionToken')}`
@@ -76,7 +80,9 @@ export class UserDetailsService {
     return this.http.put(this.url + '/' + this.formData.id, userDetailsDTO, httpOptions);
   }
 
+  // Funkcja usuwa wybranego użytkownika
   deleteUser(id: number) {
+    // Wymagane jest dodanie sessionToken do nagłówka
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${sessionStorage.getItem('sessionToken')}`
@@ -85,6 +91,7 @@ export class UserDetailsService {
     return this.http.delete(this.url + '/' + id, httpOptions);
   }
 
+  // Funkcja resetuje formularz ustawiając mu domyślne wartości
   resetForm(form:NgForm){
     form.form.reset()
     this.formData = new UserDetails()

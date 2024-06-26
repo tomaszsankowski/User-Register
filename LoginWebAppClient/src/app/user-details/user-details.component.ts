@@ -23,6 +23,7 @@ export class UserDetailsComponent implements OnInit{
     this.service.refreshList();
   }
 
+  // Funkcja przenosząca dane użytkownika do formualrza (elementu service.formData), pozwalająca na jego modyfikację
   populateForm(selectedRecord: UserDetailsDTO){
     //zamiana UserDetailsDTO na UserDetails
     const userDetails: UserDetails = {
@@ -40,9 +41,12 @@ export class UserDetailsComponent implements OnInit{
     this.service.isAddingNewUser = false;
   }
 
+  // Obsługa guzika usuwającego klikniętego użytkownika
   onDelete(id:number){
+    // Wyświetlenie okna potwierdzającego usunięcie
     if(confirm('Are you sure to delete this record?'))
     {
+      // Usunięcie użytkownika, a bardziej zlecenie tego usunięcia serwisowi
       this.service.deleteUser(id)
       .subscribe({
         next: res => {

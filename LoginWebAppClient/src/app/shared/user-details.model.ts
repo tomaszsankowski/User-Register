@@ -1,5 +1,6 @@
+// Klasy użytkownika i DTO użytkownika, identyczne jak te w back-endzie
+
 export class UserDetails {
-    // Exact same class as the User class in the back-end User.cs
     id: number = 0
     name: string = ''
     surname: string = ''
@@ -12,7 +13,6 @@ export class UserDetails {
 }
  
 export class UserDetailsDTO {
-    // Exact same class as the User class in the back-end UserDTO.cs
     id: number = 0
     name: string = ''
     surname: string = ''

@@ -1,3 +1,4 @@
+<!-- Nagłówek, który dla zalogowanych użytkowników ma dodatkowo guzik do wylogowania i wypisuje zalogowany email -->
 <div class="bg-body-secondary text-center py-5 rounded-2">
     <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="authService.isLoggedIn">
         <h2 class="ms-3">Witaj, {{this.authService.loggedEmail}}</h2>
@@ -9,7 +10,9 @@
     </div>
     <h1 class="display-6 fw-bold">User Register</h1>
 </div>
+<!-- Ciało -->
 <div class="row mt-5">
+    <!-- Formularz logowania i dodawania do bazy -->
     <div class="col-6">
         <!-- Formularz logowania dla niezalogowanego użytkownika -->
         <app-login-form *ngIf="!authService.isLoggedIn"></app-login-form>
@@ -19,8 +22,10 @@
     <!-- Lista użytkowników -->
     <div class="col-6">
         <ul class="list-group">
+            <!-- Iteracja po wszystkich użytkownikach w service.list -->
             <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3"
             *ngFor="let ud of service.list">
+                <!-- Jeden użytkownik -->
                 <div class="flex-grow-1 mouse-hover" (click)="populateForm(ud.userDetails)" (mouseenter)="ud.detailsInfo=true" (mouseleave)="ud.detailsInfo=false">
                     <!-- Dane podstawowe -->
                     <div><b>Name: </b>{{ud.userDetails.name}}</div>
@@ -34,6 +39,7 @@
                         <div><b>Podkategoria: </b>{{ud.userDetails.subcategory}}</div>
                     </div>
                 </div>
+                <!-- Guzik do usuwania użytkownika, dostępny tylko dla zalogowanych użytkowników -->
                 <span class="text-secondary" *ngIf="authService.isLoggedIn">
                     <i class="fa-solid fa-trash-can fa-lg mouse-hover" (click)="onDelete(ud.userDetails.id)"></i>
                 </span>

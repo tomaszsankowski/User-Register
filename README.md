@@ -8,7 +8,7 @@ Folder LoginWebApp zawiera cały backend, natomiast LoginWebAppClient cały fron
 Pliki, które powinny Państwa interesować:
 -
 
-Backend:
+Backend (wykorzystane biblioteki: Microsoft.EntityFrameworkCore, System.Security.Cryptography, System.ComponentModel.DataAnnotations, Microsoft.AspNetCore.Mvc, Microsoft.AspNetCore.Authorization):
 -
 
 -Program.cs - plik inicjalizujący stronę serwera
@@ -22,7 +22,7 @@ Backend:
 
 -Controllers/UsersController.cs - klasa zawierająca wszystkie funkcje obsługujące żądania
 
-Frontend:
+Frontend (wykorzystane biblioteki: ngx-toastr, biblioteki wbudowane w Angulara):
 -
 
 -src/environments : zmienne środowiskowe (zawiera tylko adres strony serwera)

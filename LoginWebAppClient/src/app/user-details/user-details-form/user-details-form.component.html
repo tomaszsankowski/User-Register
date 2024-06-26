@@ -1,0 +1,109 @@
+<form #form="ngForm" (submit)="onSubmit(form)"
+[class.submitted]="service.formSubmitted" novalidate>
+    <!-- Id (ukryte) -->
+    <input type="hidden" name="id" [value]="service.formData.id">
+    <!-- Imię -->
+    <div class="bm-3">
+        <label>Name</label>
+        <input class="form-control form-control-lg"
+        placeholder="User name"
+        #name="ngModel" name="name"
+        [(ngModel)]="service.formData.name"
+        maxlength="100" required>
+    </div>
+    <!-- Nazwisko -->
+    <div class="bm-3">
+        <label>Surname</label>
+        <input class="form-control form-control-lg"
+        placeholder="User surname"
+        #surname="ngModel" name="surname"
+        [(ngModel)]="service.formData.surname"
+        maxlength="100" required>
+    </div>
+    <!-- Email -->
+    <div class="bm-3">
+        <label>Email</label>
+        <input class="form-control form-control-lg"
+        placeholder="User email adress"
+        #email="ngModel" name="email"
+        [(ngModel)]="service.formData.email"
+        type="email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+    </div>
+    <div *ngIf="email.errors?.['pattern']">Niepoprawny format adresu email.</div>
+    <!-- Hasło -->
+    <div class="bm-3" *ngIf="this.service.isAddingNewUser">
+        <label>Password</label>
+        <input class="form-control form-control-lg"
+        placeholder="User password"
+        #password="ngModel" name="password"
+        [(ngModel)]="service.formData.password"
+        type="password"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}" required>
+        <div *ngIf="password.errors?.['pattern']">Hasło musi zawierać przynajmniej 6 znaków w tym: małe i duże litery, znaki specjalne, liczby.</div>
+    </div>
+    <!-- Telefon -->
+    <div class="bm-3">
+        <label>Phone</label>
+        <input class="form-control form-control-lg"
+        placeholder="User phone number"
+        #phone="ngModel" name="phone"
+        [(ngModel)]="service.formData.phone"
+        pattern="\d{9}" required>
+    </div>
+    <div *ngIf="phone.errors?.['pattern']">Phone number must be exactly 9 digits.</div>
+    <!-- Data urodzenia -->
+    <div class="bm-3">
+        <label>Birth Date</label>
+        <input class="form-control form-control-lg" type="text"
+               placeholder="YYYY-MM-DD"
+               #dateOfBirth="ngModel" name="dateOfBirth"
+               [(ngModel)]="service.formData.dateOfBirth"
+               pattern="\d{4}-\d{2}-\d{2}" required>
+    </div>
+    <div *ngIf="dateOfBirth.errors?.['pattern']">Zły format daty. Użyj YYYY-MM-DD.</div>
+    <!-- Kategoria -->
+    <div class="bm-3">
+        <label>Category</label>
+        <select class="form-control form-control-lg"
+                #category="ngModel" name="category"
+                [(ngModel)]="service.formData.category"
+                required>
+            <option value="Służbowy">Służbowy</option>
+            <option value="Prywatny">Prywatny</option>
+            <option value="Inny">Inny</option>
+        </select>
+    </div>
+    <!-- Podkategoria (służbowy) -->
+    <div class="bm-3" *ngIf="service.formData.category === 'Służbowy'">
+        <label>Subcategory</label>
+        <select class="form-control form-control-lg"
+                #subcategory="ngModel" name="subcategory"
+                [(ngModel)]="service.formData.subcategory"
+                required>
+            <option value="Intern">Intern</option>
+            <option value="Junior">Junior</option>
+            <option value="Mid">Mid</option>
+            <option value="Senior">Senior</option>
+            <option value="Manager">Manager</option>
+        </select>
+    </div>
+    <!-- Podkategoria (prywatny) -->
+    <div class="bm-3" *ngIf="service.formData.category === 'Inny'">
+        <label>Custom Subcategory</label>
+        <input class="form-control form-control-lg"
+               placeholder="Enter custom subcategory"
+               #subcategory="ngModel" name="subcategory"
+               [(ngModel)]="service.formData.subcategory"
+               required>
+    </div>
+    <!-- Guzik wyślij -->
+    <div class="d-grid mt-3">
+        <button *ngIf="this.service.isAddingNewUser" class="btn btn-lg btn-success" type="submit">
+            Add user
+        </button>
+        <button *ngIf="!this.service.isAddingNewUser" class="btn btn-lg btn-success" type="submit">
+            Modify user
+        </button>
+    </div>
+</form>

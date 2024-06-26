@@ -1,0 +1,43 @@
+<div class="bg-body-secondary text-center py-5 rounded-2">
+    <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="authService.isLoggedIn">
+        <h2 class="ms-3">Witaj, {{this.authService.loggedEmail}}</h2>
+        <div *ngIf="authService.isLoggedIn">
+            <button class="btn btn-lg btn-warning me-3" (click)="authService.logout()">
+                Logout
+            </button>
+        </div>
+    </div>
+    <h1 class="display-6 fw-bold">User Register</h1>
+</div>
+<div class="row mt-5">
+    <div class="col-6">
+        <!-- Formularz logowania dla niezalogowanego użytkownika -->
+        <app-login-form *ngIf="!authService.isLoggedIn"></app-login-form>
+        <!-- Formularz dodawania do bazy dla zalogowanego uzykownika -->
+        <app-user-details-form *ngIf="authService.isLoggedIn"></app-user-details-form>
+    </div>
+    <!-- Lista użytkowników -->
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3"
+            *ngFor="let ud of service.list">
+                <div class="flex-grow-1 mouse-hover" (click)="populateForm(ud.userDetails)" (mouseenter)="ud.detailsInfo=true" (mouseleave)="ud.detailsInfo=false">
+                    <!-- Dane podstawowe -->
+                    <div><b>Name: </b>{{ud.userDetails.name}}</div>
+                    <div><b>Surname: </b>{{ud.userDetails.surname}}</div>
+                    <div><b>Email: </b>{{ud.userDetails.email}}</div>
+                    <!-- Dodatkowe informacje, które będą widoczne po najechaniu myszką -->
+                    <div *ngIf="ud.detailsInfo">
+                        <div><b>Numer telefonu: </b>{{ud.userDetails.phone}}</div>
+                        <div><b>Data urodzenia: </b>{{ud.userDetails.dateOfBirth}}</div>
+                        <div><b>Kategoria: </b>{{ud.userDetails.category}}</div>
+                        <div><b>Podkategoria: </b>{{ud.userDetails.subcategory}}</div>
+                    </div>
+                </div>
+                <span class="text-secondary" *ngIf="authService.isLoggedIn">
+                    <i class="fa-solid fa-trash-can fa-lg mouse-hover" (click)="onDelete(ud.userDetails.id)"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>

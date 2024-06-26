@@ -16,6 +16,7 @@ Backend (wykorzystane biblioteki: Microsoft.EntityFrameworkCore, System.Security
 -Services/SecurityServices.cs - funkcje obsługujące hashowanie haseł oraz obsługę własnostworzonego sessionToken
 
 -Models/AuthenticadeModel.cs, Model/User.cs, Model/UserDTO.cs - klasy potrzebne do działania aplikacji
+
 -Models/CategoryValidationAttribute - obsługa walidacji pól, zawierających dane słownikowe
 
 -Data/UserContext.cs - klasa pośrednicząca w łączeniu się z bazą danych (baza danych InMemory)
@@ -55,6 +56,7 @@ Frontend (wykorzystane biblioteki: ngx-toastr, biblioteki wbudowane w Angulara):
 -otworzyć plik .sln w folderze LoginWebApp, najlepiej w Visual Studio
 
 -odpalić program backendu (powinno otworzyć przeglądarkę ze stroną zapoznawczą Swaggera
+
 -otworzyć folder z frontendem, najlepiej w VSCode
 
 -otworzyć terminal w VSCode i wpisać komendę 'ng serve -o'
@@ -67,3 +69,5 @@ Frontend (wykorzystane biblioteki: ngx-toastr, biblioteki wbudowane w Angulara):
 -domyślnie istnieje tylko jeden użytkownik (administrator) który posiada następujące dane do logowania:
 { email: admin@admin, password: Admin123! }
 
+Program może wymagać instalacji pakietów NuGet w VisualStudio. Ponadto wymagana jest instalacja Node.js i Angular CLI. Baza danych InMemory nie wymaga dodatkowej konfiguracji, oprócz oczywiście odpowiednich pakietów NuGet.
+-

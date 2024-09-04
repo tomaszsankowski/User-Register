@@ -5,9 +5,6 @@ User Register web app. Backend in C# using REST API, frontend in Angular. InMemo
 Folder LoginWebApp zawiera cały backend, natomiast LoginWebAppClient cały frontend
 -
 
-Pliki, które powinny Państwa interesować:
--
-
 Backend (wykorzystane biblioteki: Microsoft.EntityFrameworkCore, System.Security.Cryptography, System.ComponentModel.DataAnnotations, Microsoft.AspNetCore.Mvc, Microsoft.AspNetCore.Authorization):
 -
 
